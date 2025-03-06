@@ -39,7 +39,7 @@ body::before {
     top: 20px;
     left: 20px;
     z-index: 1; /* Garantir que o logotipo esteja acima do conteúdo */
-    animation: fadeOutLogo 1s ease-out forwards;
+    animation: logoBlink 6s ease-out forwards; /* Animação do logotipo piscando */
 }
 
 .logo {
@@ -58,7 +58,7 @@ body::before {
     text-align: left;
     transform: translateY(-50px);
     opacity: 0;
-    animation: fadeIn 1s ease-out 0.5s forwards;
+    animation: fadeIn 1s ease-out 6s forwards; /* A janela aparece após 6s */
 }
 
 /* Título */
@@ -151,9 +151,19 @@ h3 {
     }
 }
 
-@keyframes fadeOutLogo {
-    to {
+/* Animação do logotipo piscando */
+@keyframes logoBlink {
+    0% {
+        opacity: 1;
+    }
+    33% {
         opacity: 0;
+    }
+    66% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0; /* Faz o logotipo desaparecer após 3 piscadas */
     }
 }
 
