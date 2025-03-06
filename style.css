@@ -59,7 +59,6 @@ body::before {
     transform: translateY(-50px);
     opacity: 0;
     animation: fadeIn 1s ease-out 0.5s forwards;
-    margin: 0 15px; /* Garantir espaçamento nas laterais */
 }
 
 /* Título */
