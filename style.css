@@ -39,11 +39,21 @@ body::before {
     top: 20px;
     left: 20px;
     z-index: 1; /* Garantir que o logotipo esteja acima do conteúdo */
+    animation: fadeOutLogo 1.5s ease-out forwards;
 }
 
 .logo {
     max-width: 185px; /* Aumenta o tamanho máximo do logotipo */
     height: auto;
+}
+
+@keyframes fadeOutLogo {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 /* Container */
