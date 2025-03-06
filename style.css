@@ -164,11 +164,10 @@ h3 {
     }
 
     .container {
-        padding: 20px;
-        max-width: 100%;
-        margin: 0 10px;
-        box-sizing: border-box;
-        transform: translateY(0); /* Remove o espaço acima em telas menores */
+        padding: 30px 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+        margin: 0 15px;
     }
 
     h1 {
@@ -190,20 +189,5 @@ h3 {
 
     .logo {
         max-width: 150px; /* Aumenta o tamanho do logo em dispositivos móveis */
-    }
-}
-
-@media (max-width: 400px) {
-    .container {
-        padding: 20px 10px;
-        margin: 0 5px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
-
-    .logo {
-        max-width: 130px; /* Ajuste para telas ainda menores */
     }
 }
