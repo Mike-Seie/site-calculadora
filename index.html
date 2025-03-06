@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Percentual de Gordura</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Logotipo no canto superior esquerdo -->
+    <div class="logo-container">
+        <img src="seu-logotipo.png" alt="Logo" class="logo">
+    </div>
+
+    <div class="container">
+        <h1>Cálculo de Percentual de Gordura</h1>
+
+        <form>
+            <!-- Seleção de sexo -->
+            <label for="sexo">Sexo</label>
+            <select id="sexo" name="sexo" onchange="toggleQuadrilField()">
+                <option value="masculino">Masculino</option>
+                <option value="feminino">Feminino</option>
+            </select>
+
+            <!-- Campo de altura -->
+            <label for="altura">Altura (cm)</label>
+            <input type="number" id="altura" name="altura" required>
+
+            <!-- Campo de peso -->
+            <label for="peso">Peso (kg)</label>
+            <input type="number" id="peso" name="peso" required>
+
+            <!-- Campo de pescoço -->
+            <label for="pescoço">Pescoço (cm)</label>
+            <input type="number" id="pescoço" name="pescoço" required>
+
+            <!-- Campo de cintura -->
+            <label for="cintura">Cintura (cm)</label>
+            <input type="number" id="cintura" name="cintura" required>
+
+            <!-- Campo de quadril, visível apenas para mulheres -->
+            <div id="quadril-container" class="hidden">
+                <label for="quadril">Quadril (cm)</label>
+                <input type="number" id="quadril" name="quadril">
+            </div>
+
+            <!-- Botões de calcular e resetar -->
+            <button type="button" class="btn" onclick="calcularPercentual()">Calcular</button>
+            <button type="button" class="btn reset" onclick="resetarFormulario()">Resetar</button>
+
+            <!-- Exibição do resultado -->
+            <h3 id="resultado">Seu percentual de gordura: </h3>
+        </form>
+    </div>
+
+    <script>
+        // Função para alternar a visibilidade do campo quadril com base no sexo
+        function toggleQuadrilField() {
+            var sexo = document.getElementById("sexo").value;
+            var quadrilField = document.getElementById("quadril-container");
+            if (sexo === "feminino") {
+                quadrilField.classList.remove("hidden");
+            } else {
+                quadrilField.classList.add("hidden");
+            }
+        }
+
+        // Função para calcular o percentual de gordura
+        function calcularPercentual() {
+            var altura = parseFloat(document.getElementById("altura").value) / 100;
+            var peso = parseFloat(document.getElementById("peso").value);
+            var pescoço = parseFloat(document.getElementById("pescoço").value);
+            var cintura = parseFloat(document.getElementById("cintura").value);
+            var quadril = 0;
+            if (document.getElementById("sexo").value === "feminino") {
+                quadril = parseFloat(document.getElementById("quadril").value);
+            }
+
+            var percentualGordura;
+            if (document.getElementById("sexo").value === "masculino") {
+                // Fórmula de percentual de gordura para homens
+                percentualGordura = 495 / (1.0324 - 0.19077 * Math.log10(cintura - pescoço) + 0.15456 * Math.log10(altura * 100)) - 450;
+            } else {
+                // Fórmula de percentual de gordura para mulheres
+                percentualGordura = 495 / (1.29579 - 0.35004 * Math.log10(cintura + quadril - pescoço) + 0.22100 * Math.log10(altura * 100)) - 450;
+            }
+
+            // Exibindo o resultado
+            document.getElementById("resultado").innerText = "Seu percentual de gordura: " + percentualGordura.toFixed(2) + "%";
+        }
+
+        // Função para resetar o formulário
+        function resetarFormulario() {
+            document.querySelector("form").reset();
+            document.getElementById("resultado").innerText = "Seu percentual de gordura: ";
+            toggleQuadrilField(); // Restaura o campo de quadril dependendo do sexo
+        }
+    </script>
+
+</body>
+</html>
